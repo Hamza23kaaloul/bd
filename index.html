@@ -6,8 +6,10 @@
     <title>Billet d'Appel</title>
     <link rel="icon" type="png" sizes="42x42" href="./icons/BD-48x48.png">
     <link rel="manifest" href="./manifest.json">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./script2.js"></script>
     <!-- <script src="./script.js"></script> -->
     <style>
         @media print {
@@ -29,8 +31,14 @@
 <body class="bg-gray-100 text-gray-800 font-sans">
 
     <!-- العنوان الرئيسي -->
-    <div class="text-center py-6 bg-slate-800	 from-blue-500 to-blue-700 text-white shadow-md">
+    <div class="text-center py-6 bg-slate-800 flex justify-between px-12	 from-blue-500 to-blue-700 text-white shadow-md">
         <h1 class="text-4xl font-extrabold">Billet d'Appel</h1>
+      <!-- Custom Install Button -->
+       <button id="install-button"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
+           Install App
+        </button>
+
+      
     </div>
 
     <!-- إدخال اسم التلميذ المسؤول -->
@@ -220,6 +228,9 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+
+
 
     </script>
 </body>
