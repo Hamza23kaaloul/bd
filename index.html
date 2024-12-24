@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown Timer with Switch</title>
   <link rel="small icon" href="./icons/BD-48x48.png" type="png">
+  <link rel="manifest" href="./manifest.json">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./script2.js"></script>
   <style>
     /* Custom Styles for Switch */
     .slider {
@@ -36,8 +38,11 @@
     }
   </style>
 </head>
+<button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
+    Install App
+</button>
+<br>
 <body class="bg-white text-black flex items-center justify-center min-h-screen transition-all">
-
   <div class="flex flex-col items-center space-y-8">
     <!-- Countdown Timer -->
     <div>
