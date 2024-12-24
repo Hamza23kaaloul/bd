@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tailwind Button with Modal</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="png" sizes="42x42" href="./icons/BD-48x48.png">
+  <script src="./script2.js"></script>
+  <link rel="manifest" href="./manifest.json">
 </head>
 <body class="flex items-center justify-center h-screen bg-gray-100">
 
-  <!-- Button -->
-  <button id="openModal" class=" bg-gray-900 text-white px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none">
+
+    <div>
+        
+        
+        <button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
+            Install App
+        </button>
+        <!-- Button -->
+        <button id="openModal" class=" bg-gray-900 text-white px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none">
     برك هنا
   </button>
-
+  
   <!-- Modal -->
   <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-lg shadow-lg w-96 p-6">
@@ -24,9 +34,10 @@
     </div>
   </div>
 
+</div>
   <!-- Script -->
   <script>
-    const openModal = document.getElementById('openModal');
+      const openModal = document.getElementById('openModal');
     const closeModal = document.getElementById('closeModal');
     const modal = document.getElementById('modal');
 
