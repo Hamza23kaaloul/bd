@@ -9,7 +9,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
     // Show the install button
     const installBtn = document.getElementById('installBtn');
-    installBtn.style.display = 'block';
+    installBtn.style.display = 'inline-flex';
 
     // Add a click event to trigger the installation
     installBtn.addEventListener('click', async () => {
