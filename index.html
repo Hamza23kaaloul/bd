@@ -3,131 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown Timer with Switch</title>
-  <link rel="small icon" href="./icons/BD-48x48.png" type="png">
+  <title>Billet d'Appel</title>
+  <link rel="icon" type="png" sizes="42x42" href="./icons/BD-48x48.png">
   <link rel="manifest" href="./manifest.json">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="./script2.js"></script>
-  <style>
-    /* Custom Styles for Switch */
-    .slider {
-      position: relative;
-      display: block;
-      width: 100%;
-      height: 100%;
-      background-color: #d1d5db; /* Light gray */
-      border-radius: 9999px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .dot {
-      position: absolute;
-      top: 3px;
-      left: 4px;
-      width: 20px;
-      height: 20px;
-      background-color: white;
-      border-radius: 50%;
-      transition: transform 0.3s;
-    }
-    input:checked + .slider {
-      background-color: #4b5563; /* Dark gray */
-    }
-    input:checked + .slider .dot {
-      transform: translateX(24px);
-    }
-  </style>
+  <!-- Lottie Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
-    Install App
-</button>
-<br>
-<body class="bg-white text-black flex items-center justify-center min-h-screen transition-all">
-  <div class="flex flex-col items-center space-y-8">
-    <!-- Countdown Timer -->
-    <div>
-      <h1 class="text-2xl font-bold mb-4 text-center">This app will be on:</h1>
-      <div class="flex space-x-4">
-        <!-- Days -->
-        <div class="flex flex-col items-center">
-          <span id="days" class="text-4xl font-bold">5</span>
-          <span class="text-sm">Days</span>
-        </div>
-        <!-- Hours -->
-        <div class="flex flex-col items-center">
-          <span id="hours" class="text-4xl font-bold">00</span>
-          <span class="text-sm">Hours</span>
-        </div>
-        <!-- Minutes -->
-        <div class="flex flex-col items-center">
-          <span id="minutes" class="text-4xl font-bold">00</span>
-          <span class="text-sm">Minutes</span>
-        </div>
-        <!-- Seconds -->
-        <div class="flex flex-col items-center">
-          <span id="seconds" class="text-4xl font-bold">60</span>
-          <span class="text-sm">Seconds</span>
-        </div>
-      </div>
-    </div>
+<body class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white flex items-center justify-center min-h-screen">
+  
+  <!-- Main Content -->
+  <div class="text-center px-4">
+    <!-- Animation Container -->
+    <div id="update-animation" class="w-full max-w-lg mx-auto"></div>
 
-    <!-- Toggle Switch -->
-    <div class="flex items-center space-x-3">
-      <span class="text-sm">Light</span>
-      <label for="themeSwitcher" class="relative inline-block w-12 h-6">
-        <input id="themeSwitcher" type="checkbox" class="hidden">
-        <span class="slider">
-          <span class="dot"></span>
-        </span>
-      </label>
-      <span class="text-sm">Dark</span>
+    <!-- Message -->
+    <button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
+        Install App
+     </button>
+    <h1 class="text-4xl sm:text-5xl font-extrabold mt-6">
+      We're Updating Our Website!
+    </h1>
+    <p class="text-lg sm:text-xl mt-4">
+      Stay tuned for something amazing. We'll be back soon!
+    </p>
+    <!-- Progress Information -->
+    <div class="mt-8">
+      <p class="text-sm opacity-80">Estimated time remaining: <strong>5Days</strong></p>
     </div>
   </div>
 
   <script>
-    // Countdown Logic
-    const countdownDate = new Date().getTime() + 5 * 24 * 60 * 60 * 1000; // 5 Days from now
-    let remainingSeconds = 60; // Start seconds at 60
+    // Load Lottie Animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const animationContainer = document.getElementById("update-animation");
+      lottie.loadAnimation({
+        container: animationContainer, // ID of the container
+        renderer: "svg",               // Render as SVG
+        loop: true,                    // Loop the animation
+        autoplay: true,                // Start the animation automatically
+        path: "https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json", // Example JSON animation (replace with your file)
+        // path: "https://assets7.lottiefiles.com/packages/lf20_R5D1Ik.json", // Example JSON animation (replace with your file)
+        
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = countdownDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-      // Update the seconds manually
-      remainingSeconds--;
-      if (remainingSeconds < 0) {
-        remainingSeconds = 59;
-      }
-
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
-      document.getElementById("seconds").textContent = remainingSeconds.toString().padStart(2, "0");
-
-      if (distance < 0) {
-        clearInterval(interval);
-        document.querySelector("h1").textContent = "Countdown Ended!";
-      }
-    }
-
-    const interval = setInterval(updateCountdown, 1000);
-
-     // Toggle Dark/Light Mode
-     const themeSwitcher = document.getElementById("themeSwitcher");
-    themeSwitcher.addEventListener("change", () => {
-      if (themeSwitcher.checked) {
-        document.body.classList.remove("bg-white", "text-black");
-        document.body.classList.add("bg-black", "text-white");
-      } else {
-        document.body.classList.remove("bg-black", "text-white");
-        document.body.classList.add("bg-white", "text-black");
-      }
-    });
+            });
+    })
   </script>
-
 </body>
 </html>
+
+    
