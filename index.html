@@ -1,237 +1,56 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billet d'Appel</title>
-    <link rel="icon" type="png" sizes="42x42" href="./icons/BD-48x48.png">
-    <link rel="manifest" href="./manifest.json">
-     <script src="./script.js"></script>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./script2.js"></script>
-    <!-- <script src="./script.js"></script> -->
-    <style>
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #print-section, #print-section * {
-                visibility: visible;
-            }
-            #print-section {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billet d'Appel</title>
+  <link rel="icon" type="png" sizes="42x42" href="./icons/BD-48x48.png">
+  <link rel="manifest" href="./manifest.json">
+  <script src="./script2.js"></script>
+  <!-- Lottie Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-
-    <!-- العنوان الرئيسي -->
-    <div class="text-center py-6 bg-slate-800 flex justify-between px-12	 from-blue-500 to-blue-700 text-white shadow-md">
-        <h1 class="text-4xl font-extrabold">Billet d'Appel</h1>
-      <!-- Custom Install Button -->
-       <button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
-           Install App
-        </button>
-
-      
-    </div>
-
-    <!-- إدخال اسم التلميذ المسؤول -->
-    <div class="container mx-auto my-8 px-4">
-        <div class="text-center mb-6">
-            <label for="student-name" class="block text-lg font-semibold mb-2">LE NOM DE EODR SOMAINE DE LA PROMOTION</label>
-            <input type="text" id="student-name" placeholder="أدخل اسم التلميذ المسؤول" class="p-2 border rounded w-1/2 text-center" />
-        </div>
-    </div>
-
-    <!-- إدخال البيانات -->
-    <div class="container mx-auto my-8 px-4">
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border rounded-lg shadow-lg">
-                <thead>
-                    <tr class="bg-gray-600 text-white text-lg">
-                        <th class="p-3">Group</th>
-                        <th>Effe The</th>
-                        <th>present</th>
-                        <th>Reppot</th>
-                        <th>Consultation</th>
-                        <th>Abs</th>
-                        <th>Service Gard</th>
-                        <th>Permission</th>
-                        <th>LD</th>
-                    </tr>
-                </thead>
-                <tbody id="groups-data" class="text-center">
-                    <!-- البيانات ستُضاف هنا -->
-                </tbody>
-            </table>
-        </div>
-        <div class="text-center mt-6">
-            <button onclick="generateReport()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition font-semibold">إنشاء Billet d'Appel</button>
-        </div>
-    </div>
-
-    <!-- ورقة Billet d'Appel -->
-    <div id="print-section" class="hidden container mx-auto my-8 bg-white p-8 rounded-lg shadow-lg text-gray-800">
-        <div class="text-center mb-6">
-            <h2 class="text-3xl font-bold text-blue-700">Billet d'Appel</h2>
-            <p class="text-lg text-right"><strong>التاريخ:</strong> <span id="report-date"></span></p>
-        </div>
-        <div class="mb-4">
-            <p class="text-lg font-semibold text-blue-600">TOTAL: <span id="total-students"></span></p>
-            <p class="text-lg font-semibold text-green-500">PRESENT: <span id="total-present"></span></p>
-        </div>
-        <div class="mt-4 text-left">
-            <p class="text-lg"><strong>Reppot:</strong> <span id="total-reppot"></span></p>
-            <p class="text-lg"><strong>Consultation:</strong> <span id="total-consultation"></span></p>
-            <p class="text-lg"><strong>Abs:</strong> <span id="total-abs"></span></p>
-            <p class="text-lg"><strong>Service Gard:</strong> <span id="total-gard"></span></p>
-            <p class="text-lg"><strong>Permission:</strong> <span id="total-permission"></span></p>
-            <p class="text-lg"><strong>LD:</strong> <span id="total-ld"></span></p>
-        </div>
-        <div class="mt-6 text-right">
-            <p class="text-gray-600 italic text-sm">EODR: <span id="responsible-student"></span></p>
-        </div>
-    </div>
-
-    <!-- زر الطباعة -->
-    <div class="text-center mb-6">
-        <button onclick="window.print()" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition font-semibold">طباعة Billet d'Appel</button>
-    </div>
-    
-    <footer class="bg-gray-800 text-white py-4">
-        <div class="max-w-screen-xl mx-auto text-center">
-          <p>&copy; <span id="current-year"></span> KAALOUL HAMZA. All rights reserved.</p>
-          <p class="text-sm">Designed with <span class="text-red-500">♥</span> using Tailwind CSS</p>
-        </div>
-      </footer>
- 
-      
-
-    <!-- JavaScript -->
-    <script>
-        const groups = [
-            { name: "Cyber 1", total: 0 },
-            { name: "Cyber 2", total: 0 },
-            { name: "Genis 1", total: 0 },
-            { name: "Genis 2", total: 0 },
-            { name: "Réseaux 1", total: 0 },
-            { name: "Réseaux 2", total: 0 },
-            { name: "Infographie", total: 0 },
-            { name: "Exploi 1", total: 0 },
-            { name: "Exploi 2", total: 0 },
-            { name: "Technique 1", total: 0 },
-            { name: "Technique 2", total: 0 },
-            { name: "EE 1", total: 0 },
-            { name: "EE 2", total: 0 }
-        ];
-
-        const tbody = document.getElementById('groups-data');
-
-        // إنشاء الصفوف
-        groups.forEach(group => {
-            const row = `
-                <tr class="border-t">
-                    <td class="p-3">${group.name}</td>
-                    <td><input type="number" min="0" value="${group.total}" class="w-16 p-1 border rounded" id="total-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="present-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="reppot-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="consultation-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="abs-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="gard-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="permission-${group.name}"></td>
-                    <td><input type="number" min="0" value="0" class="w-16 p-1 border rounded" id="ld-${group.name}"></td>
-                </tr>
-            `;
-            tbody.insertAdjacentHTML('beforeend', row);
-        });
-
-        function generateReport() {
-            let totalStudents = 0;
-            let totalPresent = 0;
-            let totalReppot = 0;
-            let totalConsultation = 0;
-            let totalAbs = 0;
-            let totalGard = 0;
-            let totalPermission = 0;
-            let totalLD = 0;
-
-            // جمع بيانات المجموعات
-            groups.forEach(group => {
-                let total = parseInt(document.getElementById(`total-${group.name}`).value) || 0;
-                let present = parseInt(document.getElementById(`present-${group.name}`).value) || 0;
-                let reppot = parseInt(document.getElementById(`reppot-${group.name}`).value) || 0;
-                let consultation = parseInt(document.getElementById(`consultation-${group.name}`).value) || 0;
-                let abs = parseInt(document.getElementById(`abs-${group.name}`).value) || 0;
-                let gard = parseInt(document.getElementById(`gard-${group.name}`).value) || 0;
-                let permission = parseInt(document.getElementById(`permission-${group.name}`).value) || 0;
-                let ld = parseInt(document.getElementById(`ld-${group.name}`).value) || 0;
-
-                // جمع الإجمالي
-                totalStudents += total;
-                totalPresent += present;
-                totalReppot += reppot;
-                totalConsultation += consultation;
-                totalAbs += abs;
-                totalGard += gard;
-                totalPermission += permission;
-                totalLD += ld;
-            });
-
-            // حساب PRESENT
-            let totalCalculatedPresent = totalPresent;
-            // let totalCalculatedPresent = totalStudents - (totalReppot + totalConsultation + totalAbs + totalGard + totalPermission + totalLD);
-
-            // عرض القيم
-            document.getElementById('total-students').innerText = totalStudents;
-            document.getElementById('total-present').innerText = totalCalculatedPresent;
-            document.getElementById('total-reppot').innerText = totalReppot;
-            document.getElementById('total-consultation').innerText = totalConsultation;
-            document.getElementById('total-abs').innerText = totalAbs;
-            document.getElementById('total-gard').innerText = totalGard;
-            document.getElementById('total-permission').innerText = totalPermission;
-            document.getElementById('total-ld').innerText = totalLD;
-
-            // الحصول على اسم التلميذ المسؤول
-            const studentName = document.getElementById('student-name').value || "غير مُحدد";
-
-            // طباعة اسم التلميذ المسؤول
-            document.getElementById('responsible-student').innerText = studentName;
-
-            // التاريخ بالصيغة الفرنسية
-            const today = new Date();
-            document.getElementById('report-date').innerText = today.toLocaleDateString('fr-FR'); 
-
-            // إظهار الورقة للطباعة
-            document.getElementById('print-section').classList.remove('hidden');
-        }
-
-
-        // Automatically updates the current year
-document.getElementById("current-year").textContent = new Date().getFullYear();
+<body class="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white flex items-center justify-center min-h-screen">
   
-// تحقق من دعم الـ Service Worker في المتصفح
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('./service-worker.js') // سجل الـ Service Worker
-            .then((registration) => {
-                console.log('Service Worker has been registered successfully:', registration);
-            })
-            .catch((error) => {
-                console.log('Service Worker registration failed:', error);
+  <!-- Main Content -->
+  <div class="text-center px-4">
+    <!-- Animation Container -->
+    <div id="update-animation" class="w-full max-w-lg mx-auto"></div>
+
+    <!-- Message -->
+    <button id="installBtn"  class="bg-gradient-to-r from-blue-500 to-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:from-blue-600 hover:to-green-600 transition-transform transform hover:scale-105">
+        Install App
+     </button>
+    <h1 class="text-4xl sm:text-5xl font-extrabold mt-6">
+      We're Updating Our Website!
+    </h1>
+    <p class="text-lg sm:text-xl mt-4">
+      Stay tuned for something amazing. We'll be back soon!
+    </p>
+    <!-- Progress Information -->
+    <div class="mt-8">
+      <p class="text-sm opacity-80">Estimated time remaining: <strong>5Days</strong></p>
+    </div>
+  </div>
+
+  <script>
+    // Load Lottie Animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const animationContainer = document.getElementById("update-animation");
+      lottie.loadAnimation({
+        container: animationContainer, // ID of the container
+        renderer: "svg",               // Render as SVG
+        loop: true,                    // Loop the animation
+        autoplay: true,                // Start the animation automatically
+        path: "https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json", // Example JSON animation (replace with your file)
+        // path: "https://assets7.lottiefiles.com/packages/lf20_R5D1Ik.json", // Example JSON animation (replace with your file)
+        
+
             });
-    });
-}
-
-
-
-
-    </script>
+    })
+  </script>
 </body>
 </html>
+    
